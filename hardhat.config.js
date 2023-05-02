@@ -1,10 +1,9 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
+require('dotenv').config();
 const fs = require('fs');
 // const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
 
-const aKey=fs.readFileSync(".asecret").toString()
-const pKey=fs.readFileSync(".secret").toString()
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
@@ -24,8 +23,8 @@ module.exports = {
       url: "http://127.0.0.1:8545"
     },
     mumbai: {
-      url: `https://polygon-mumbai.g.alchemy.com/v2/${aKey}`,
-      accounts: [pKey]
+      url: process.env.PolyApiKey,
+      accounts: [ process.env.privateKey ]
     },
     //goerli: {
       //url: "",
