@@ -60,38 +60,40 @@ export default function Profile () {
     if(!dataFetched)
         getNFTData(tokenId);
 
-    return (
-        <div className="profileClass" style={{"min-height":"100vh"}}>
-            <Navbar></Navbar>
+        return (
             <div className="profileClass">
-            <div className="flex text-center flex-col mt-11 md:text-2xl text-white">
-                <div className="mb-5">
-                    <h2 className="font-bold">Wallet Address</h2>  
-                    {address}
-                </div>
-            </div>
-            <div className="flex flex-row text-center justify-center mt-10 md:text-2xl text-white">
-                    <div>
-                        <h2 className="font-bold">No. of NFTs</h2>
-                        {data.length}
+                <Navbar></Navbar>
+                <div className="profileClass">
+                <div className="flex text-center flex-col mt-11 md:text-2xl text-white ">
+                    <div className="mb-5 mt-20">
+                        <h2 className="font-bold">Wallet Address : {address}</h2>  
                     </div>
-                    <div className="ml-20">
-                        <h2 className="font-bold">Total Value</h2>
-                        {totalPrice} MAITC
+                </div>
+                <div className="flex flex-row text-center justify-center mt-10 md:text-2xl text-white ">
+                        <div>
+                            <h2 className="font-bold">Total NFTs</h2>
+                            {data.length}
+                        </div>
+                        <div className="ml-20">
+                            <h2 className="font-bold">Total Value</h2>
+                            {totalPrice} ETH
+                        </div>
+                </div>
+                <div className="flex flex-col text-center items-center mt-11 text-white ">
+                    <h2 className="font-bold">Your NFTs</h2>
+                    <div className="flex mt-5 justify-between flex-wrap max-w-screen-xl text-center">
+                        {data.map((value, index) => {
+                        return <NFTTile data={value} key={index}></NFTTile>;
+                        })}
                     </div>
-            </div>
-            <div className="flex flex-col text-center items-center mt-11 text-white">
-                <h2 className="font-bold">Your NFTs</h2>
-                <div className="flex justify-center flex-wrap max-w-screen-xl">
-                    {data.map((value, index) => {
-                    return <NFTTile data={value} key={index}></NFTTile>;
-                    })}
+                    <div className="mt-10 text-xl">
+                        {data.length == 0 ? "Oops, No NFT data to display (Are you logged in?)":""}
+                    </div>
+
+
+                    
                 </div>
-                <div className="mt-10 text-xl">
-                    {data.length == 0 ? "Oops, No NFT data to display (Are you logged in?)":""}
                 </div>
             </div>
-            </div>
-        </div>
-    )
-};
+        )
+    };
