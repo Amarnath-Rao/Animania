@@ -1,3 +1,51 @@
+Project Details:-
+As part of theme "Digital Transformation", our team aimed to use Decentralizaed Application using Blockchain Technology
+
+Vision:
+
+Everybody would have played deck cards in their life, challenging others with their cards, buying them, selling them and battleing with "Atk" "Def" "Spd" "Health" stats to other players cards
+
+So we aimed to provide a decentralized version of this daily life fun and challenging game
+
+We will provide users to upload their Charecter card using "IPFS" in dapp
+
+So, enable trustworthy transactions and agreements to be made between dispersed, anonymous participants without the need for a centralised authority, a legal system, or an external enforcement mechanism. The key advantages of using are:
+•Speed, efficiency and accuracy
+•Trust and transparency
+•Security
+•Resource optimisation
+
+Tech Stacks use:
+
+Solidity
+ReactJS
+NextJS
+Hardhat
+Tailwind css
+Polygon 
+Ethereum
+IPFS
+
+
+
+Images:-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Default content:-
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -11,6 +59,7 @@ yarn dev
 # or
 pnpm dev
 ```
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

@@ -30,7 +30,7 @@ const getCurrentWalletConnected = async()=>{
           console.log(accounts[0]);
         }
         else{
-          alert("please connect your wallet to load NFTs....")
+          alert("please connect your wallet, to load players....")
           console.log("connect to metamask");
         }
 
@@ -41,8 +41,7 @@ const getCurrentWalletConnected = async()=>{
   }
   else{
     console.log("metamask is not installed!! please install metamask.")
-  }
-}
+}}
 const addWalletListener = async()=>{
   if(typeof window!= "undefined" && typeof window.ethereum !="undefined") {
     window.ethereum.on("accountsChanged",(accounts)=>{
@@ -84,8 +83,8 @@ const ConnectWallet = async()=>{
 <nav className="bg-white px-2 sm:px-4 py-2.5 dark:bg-blue-900 fixed w-full z-20 top-0 left-0 border-b border-blue-200 dark:border-blue-600">
   <div className="container flex flex-wrap items-center justify-between mx-auto">
   <a href="#" className="flex items-center">
-      <img src="https://images.vexels.com/media/users/3/266634/isolated/preview/75815b69d2e7849562b875cdac5bd476-simple-business-bitcoin-symbol-money-icon.png" className="h-6 mr-3 sm:h-9" alt="Flowbite Logo"/>
-      <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">BlockNFT</span>
+      <img src="https://user-images.githubusercontent.com/92430906/236384921-73daae3c-cccd-4771-be53-70678e403cbb.png" className="h-6 mr-3 sm:h-9" alt="Flowbite Logo"/>
+      <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Animania</span>
   </a>
   <div className="flex md:order-2">
       <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={ConnectWallet}>{connectMessage}</button>
@@ -97,10 +96,13 @@ const ConnectWallet = async()=>{
   <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul className="flex flex-col p-4 mt-4 border border-blue-100 rounded-lg bg-blue-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-blue-800 md:dark:bg-blue-900 dark:border-blue-700">
       <li  className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" >
-        <Link to="/">MarketPlace</Link>
+        <Link to="/">Home</Link>
       </li>
       <li className="block py-2 pl-3 pr-4 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-blue-700">
-        <Link to="/sellNFT">List My NFT</Link>
+        <Link to="/sellNFT">Character Rising</Link>
+      </li>
+      <li className="block py-2 pl-3 pr-4 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-blue-700">
+        <Link to="/Arena">Arena</Link>
       </li>
       <li className="block py-2 pl-3 pr-4 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-blue-700">
         <Link to="/profile">Profile</Link>

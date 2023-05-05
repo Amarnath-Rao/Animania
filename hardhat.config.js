@@ -2,7 +2,7 @@ require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
 require('dotenv').config();
 const fs = require('fs');
-// const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
+
 
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {

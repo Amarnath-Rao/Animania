@@ -1,83 +1,99 @@
+import React,{Component} from 'react';
+import { ReactDOM } from 'react';
 import Navbar from "./Navbar";
-import footer from "./footer";
-import NFTTile from "./NFTTile";
-import MarketplaceJSON from "../Marketplace.json";
-import axios from "axios";
-import { useState } from "react";
-import { GetIpfsUrlFromPinata } from "../utils";
 
-export default function Marketplace() {
+import './Arena1.css'
+// Get payer input values
+let player1;
+
+let player2;
+
+// Update the HTML to display the player stats
 
 
-const [data, updateData] = useState([]);
-const [dataFetched, updateFetched] = useState(false);
+// Function to calculate the damage done by an attacker
+function calculateDamage() {
+    player1 = {
+        name: document.getElementById("name1").value,
+        health: parseInt(document.getElementById("health1").value),
+        attack: parseInt(document.getElementById("attack1").value),
+        defense: parseInt(document.getElementById("defense1").value)
+    };
+    player2={
+    name: document.getElementById("name2").value,
+	health: parseInt(document.getElementById("health2").value),
+	attack: parseInt(document.getElementById("attack2").value),
+	defense: parseInt(document.getElementById("defense2").value)
+    };
+    document.getElementById("name1").innerHTML = player1.name;
+    document.getElementById("health1").innerHTML = player1.health;
+    document.getElementById("attack1").innerHTML = player1.attack;
+    document.getElementById("defense1").innerHTML = player1.defense;
 
-async function getAllNFTs() {
-    const ethers = require("ethers");
-    //After adding your Hardhat network to your metamask, this code will get providers and signers
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    
-    const signer = provider.getSigner();
-    //Pull the deployed contract instance
-    let contract = new ethers.Contract(MarketplaceJSON.address, MarketplaceJSON.abi, signer)
-    //create an NFT Token
-    let transaction = await contract.getAllNFTs()
+    document.getElementById("name2").innerHTML = player2.name;
+document.getElementById("health2").innerHTML = player2.health;
+document.getElementById("attack2").innerHTML = player2.attack;
+document.getElementById("defense2").innerHTML = player2.defense;
+    console.log(player1,player2);
+	let damage1 = player1.attack - player2.defense;
+	let damage2 = player2.attack - player1.defense;
+	let turns1 = Math.ceil(player2.health / damage1);
+	let turns2 = Math.ceil(player1.health / damage2);
 
-    //Fetch all the details of every NFT from the contract and display
-    const items = await Promise.all(transaction.map(async i => {
-        var tokenURI = await contract.tokenURI(i.tokenId);
-        console.log("getting this tokenUri", tokenURI);
-        tokenURI = GetIpfsUrlFromPinata(tokenURI);
-        let meta = await axios.get(tokenURI);
-        meta = meta.data;
-
-        let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
-        let item = {
-            price,
-            tokenId: i.tokenId.toNumber(),
-            seller: i.seller,
-            owner: i.owner,
-            image: meta.image,
-            name: meta.name,
-            description: meta.description,
-        }
-        return item;
-    }))
-
-    updateFetched(true);
-    updateData(items);
+	// Determine the winner based on the number of turns
+  let winner = "";
+  if (turns1 >= turns2) {
+    winner = player1.name;
+   alert("player1's Charecter "+player1.name + " wins! Please wait for 24hrs, admin will verify your victory and will send Player2's Charecter "+player2.name+" card to your wallet");
+   window.location.href="/"
+  } else {
+    winner = player2.name;
+    alert("player2's Charecter "+player2.name + " wins! Please wait for 24hrs, admin will verify your victory and will send Player1's Charecter "+player1.name+" card to your wallet");
+    window.location.href="/"
+  }
+  let resultContainer = document.getElementById("result");
+  resultContainer.innerHTML = winner + " wins!";
+  resultContainer.style.color = "white";
+  resultContainer.style.backgroundColor = "#2464ec";
+  resultContainer.style.padding = "10px";
+  resultContainer.style.borderRadius = "5px";
 }
-
-if(!dataFetched)
-    getAllNFTs();
-
-return (
+const Arena=()=> {
+  return (
     <div>
-        <Navbar></Navbar>
-        <div className="flex flex-col place-items-center mt-20">
-            <div className="md:text-xl font-bold text-white">
-                All players Assembled
-            </div>
-           
-            <div className="flex mt-5 justify-between flex-wrap max-w-screen-xl text-center">
-                        {data.map((value, index) => {
-                        return <NFTTile data={value} key={index}></NFTTile>;
-                        })}
-                    </div>
-        </div>    
+      <Navbar></Navbar>
+      <div className="Arena">
+      <div className="player-container">
+		<div className="player" id="player1">
+			<h3>Player 1</h3>
+			<p>Name: <input type="text" id="name1" placeholder="Player 1"/></p>
+      <p>Wallet Address: <input type="test" id="walad1" placeholder="0x..."/></p>
+			<p>Health: <input type="number" id="health1" placeholder="100"/></p>
+			<p>Attack: <input type="number" id="attack1" placeholder="8"/></p>
+			<p>Defense: <input type="number" id="defense1" placeholder="8"/></p>
+		</div>
+		<div className="player" id="player2">
+			<h3>Player 2</h3>
+			<p>Name: <input type="text" id="name2" placeholder="Player 2"/></p>
+      <p>Wallet Address: <input type="test" id="walad2" placeholder="0x..."/></p>
+            <p>Health: <input type="number" id="health2" placeholder="100"/></p>
+			<p>Attack: <input type="number" id="attack2" placeholder="10"/></p>
+			<p>Defense: <input type="number" id="defense2" placeholder="5"/></p>
+		</div>
+	</div>
+	<button onClick={calculateDamage}>Let's see the winner</button>
+  <br></br>
+  <div id="result"></div>
+  
 
 
-
-
-
-        
-         
-        <footer className="bg-white dark:bg-blue-900 h-screen justify-between" >
+    </div>
+    <footer className="bg-white dark:bg-blue-900 h-screen justify-between" >
     <div className="mx-auto w-full max-w-screen-xl">
       <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
         <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Company</h2>
-            <ul className="text-gray-500 dark:text-gray-400 font-medium">
+            <ul className="text-gray-500 dark:text-blue-400 font-medium">
                 <li className="mb-4">
                     <a href="#" className=" hover:underline">About</a>
                 </li>
@@ -94,7 +110,7 @@ return (
         </div>
         <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Help center</h2>
-            <ul className="text-gray-500 dark:text-gray-400 font-medium">
+            <ul className="text-gray-500 dark:text-blue-400 font-medium">
                 <li className="mb-4">
                     <a href="#" className="hover:underline">Discord Server</a>
                 </li>
@@ -111,7 +127,7 @@ return (
         </div>
         <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
-            <ul className="text-gray-500 dark:text-gray-400 font-medium">
+            <ul className="text-gray-500 dark:text-blue-400 font-medium">
                 <li className="mb-4">
                     <a href="#" className="hover:underline">Privacy Policy</a>
                 </li>
@@ -170,5 +186,7 @@ return (
     </div>
 </footer>  
     </div>
-);
+  );
 }
+
+export default Arena;

@@ -66,28 +66,28 @@ export default function Profile () {
                 <div className="profileClass">
                 <div className="flex text-center flex-col mt-11 md:text-2xl text-white ">
                     <div className="mb-5 mt-20">
-                        <h2 className="font-bold">Wallet Address : {address}</h2>  
+                        <h2 className="font-bold"> Account ID : {address}</h2>  
                     </div>
                 </div>
                 <div className="flex flex-row text-center justify-center mt-10 md:text-2xl text-white ">
                         <div>
-                            <h2 className="font-bold">Total NFTs</h2>
+                            <h2 className="font-bold">Total Players</h2>
                             {data.length}
                         </div>
                         <div className="ml-20">
-                            <h2 className="font-bold">Total Value</h2>
-                            {totalPrice} ETH
+                            <h2 className="font-bold">Total Player Value</h2>
+                            {totalPrice} MATIC
                         </div>
                 </div>
                 <div className="flex flex-col text-center items-center mt-11 text-white ">
-                    <h2 className="font-bold">Your NFTs</h2>
+                    <h2 className="font-bold">Your Players</h2>
                     <div className="flex mt-5 justify-between flex-wrap max-w-screen-xl text-center">
                         {data.map((value, index) => {
                         return <NFTTile data={value} key={index}></NFTTile>;
                         })}
                     </div>
                     <div className="mt-10 text-xl">
-                        {data.length == 0 ? "Oops, No NFT data to display (Are you logged in?)":""}
+                        {data.length == 0 ? "Oops, No Player data to display (Are you logged in?)":""}
                     </div>
 
 

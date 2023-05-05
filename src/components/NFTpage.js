@@ -54,12 +54,12 @@ async function buyNFT(tokenId) {
         //Pull the deployed contract instance
         let contract = new ethers.Contract(MarketplaceJSON.address, MarketplaceJSON.abi, signer);
         const salePrice = ethers.utils.parseUnits(data.price, 'ether')
-        updateMessage("Buying the NFT... Please Wait (Upto 5 mins)")
+        updateMessage("Buying the Character... Please Wait (Upto 5 mins)")
         //run the executeSale function
         let transaction = await contract.executeSale(tokenId, {value:salePrice});
         await transaction.wait();
 
-        alert('You successfully bought the NFT!');
+        alert('You successfully bought the Character!');
         updateMessage("");
     }
     catch(e) {
@@ -80,7 +80,7 @@ async function buyNFT(tokenId) {
             <div className="flex ml-20 mt-20">
                 <img src={data.image} alt="" className="w-2/5" />
                 <div className="text-xl ml-20 space-y-8 text-white shadow-2xl rounded-lg border-2 p-5">
-                    <div>
+                    <div >
                         Name: {data.name}
                     </div>
                     <div>
@@ -97,8 +97,8 @@ async function buyNFT(tokenId) {
                     </div>
                     <div>
                     { currAddress != data.owner && currAddress != data.seller ?
-                        <button className="enableEthereumButton bg-white-500 hover:bg-white-700 text-white font-bold py-2 px-4 rounded text-sm" onClick={() => buyNFT(tokenId)}>Buy this NFT</button>
-                        : <div className="text-emerald-700">You are the owner of this NFT</div>
+                        <button className="enableEthereumButton bg-gray-500 hover:bg-gray-700 text-red font-bold py-2 px-4 rounded text-sm" onClick={() => buyNFT(tokenId)}>Buy this Character</button>
+                        : <div className="text-emerald-700">You are the owner of this Character</div>
                     }
                     <div className="text-green text-center mt-3">{message}</div>
                     </div>
